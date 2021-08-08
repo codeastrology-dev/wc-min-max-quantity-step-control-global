@@ -1,19 +1,19 @@
-=== WooCommerce Min Max Quantity & Step Control Global ===
+=== Min Max Quantity & Step Control Global ===
 Contributors: codersaiful,codeastrology
 Donate link: https://codecanyon.net/item/woocommerce-min-max-quantity-step-control/22962198
 Tags: WooCommerce, minimum quantity, maximum quantity, woocommrce quantity, customize woocommerce quantity, customize wc quantity, wc qt, max qt, min qt, maximum qt, minimum qt
 Requires at least: 4.0.0
-Tested up to: 5.5
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.3
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Min Max Quantity & Step Control Global  plugin offers to set product's minimum, maximum quantity and step Globally.
+Min Max Quantity & Step Control Global for Woocommerce plugin offers to set product's minimum, maximum quantity and step Globally.
 
 == Description ==
 
-WooCommerce Min Max Quantity & Step Control Global  plugin offers to set product's minimum, maximum quantity and step Globally. As well as by this plugin you will be able to set the increment or decrement step as much as you want. In a word: Minimum Quantity, Maximum Quantity and Step can be controlled.
+Min Max Quantity & Step Control Global for Woocommerce plugin offers to set product's minimum, maximum quantity and step Globally. As well as by this plugin you will be able to set the increment or decrement step as much as you want. In a word: Minimum Quantity, Maximum Quantity and Step can be controlled.
 
 
 == Installation ==
@@ -46,6 +46,9 @@ Very easy. Just go to WooCommerce -> Min Max & Step Global
 `/assets/screenshot-7.png`
 
 == Changelog ==
+
+= 1.6 =
+* Plugin trademark issue solved
 
 = 1.4 =
 * Cart page validation issue fixed
