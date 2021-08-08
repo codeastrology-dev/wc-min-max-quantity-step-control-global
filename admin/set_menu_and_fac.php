@@ -147,7 +147,7 @@ function wcmmq_g_faq_page_details(){
                         </td>
                     </tr>
                 </table>
-                <div class="wcmmq_g_waring_msg"><?php echo esc_html__( "<i>Important Note</i>: Don't change [<b>%s</b>], because it will work as like  variable. Here 1st [<b>%s</b>] will return Quantity(min/max) and second [<b>%s</b>] will return product's name.", 'wcmmq' ); ?></div>
+                <div class="wcmmq_g_waring_msg"><?php echo esc_html__( "Important Note: Don't change [%s], because it will work as like  variable. Here 1st [%s] will return Quantity(min/max) and second [%s] will return product's name.", 'wcmmq' ); ?></div>
             </div>
             <br>
             <button type="submit" name="configure_submit" class="button-primary primary button btn-info"><?php echo esc_html__( 'Submit', 'wcmmq' ); ?></button>
