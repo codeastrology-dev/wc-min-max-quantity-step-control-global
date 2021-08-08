@@ -7,9 +7,16 @@
  * @since 1.0
  */
 function wcmmq_g_add_menu(){
-    add_submenu_page( 'woocommerce', 'WC Min Max Step Quantity', 'Min Max Step Quantity Global', 'manage_options', 'wcmmq_g_min_max_step', 'wcmmq_g_faq_page_details' );
+    add_submenu_page( 
+        'woocommerce',
+        __( 'WC Min Max Step Quantity', 'wcmmq' ),
+        __( 'Min Max Step Quantity Global', 'wcmmq' ),
+        'manage_options',
+        'wcmmq_g_min_max_step',
+        'wcmmq_g_faq_page_details'
+    );
 }
-add_action( 'admin_menu','wcmmq_g_add_menu' );
+add_action( 'admin_menu', 'wcmmq_g_add_menu' );
 
 /**
  * Faq Page for WC Min Max Quantity
@@ -21,7 +28,7 @@ function wcmmq_g_faq_page_details(){
         $data = WC_MMQ_G::getDefaults();
         //var_dump($value);
         update_option( WC_MMQ_G::KEY, $data );
-        echo '<div class="updated inline"><p>Reset Successfully</p></div>';
+        echo sprintf( '<div class="updated inline"><p>%s</p></div>', __( 'Reset Successfully', 'wcmmq' ));
     }else if( isset( $_POST['data'] ) && isset( $_POST['configure_submit'] ) ){
         //Confirm Manage option permission
         if( !current_user_can('manage_options') ){
@@ -55,7 +62,7 @@ function wcmmq_g_faq_page_details(){
         
         if( !$data['_wcmmq_g_min_quantity'] && $data['_wcmmq_g_min_quantity'] != 0 &&  $data['_wcmmq_g_min_quantity'] !=1 && $data['_wcmmq_g_max_quantity'] <= $data['_wcmmq_g_min_quantity'] ){
             $data['_wcmmq_g_max_quantity'] = $data['_wcmmq_g_min_quantity'] + 5;
-            echo '<div class="error notice"><p>Maximum Quantity can not be smaller, So we have added 5</p></div>';
+            echo sprintf( '<div class="error notice"><p>%s</p></div>', __( 'Maximum Quantity can not be smaller, So we have added 5', 'wcmmq' ) );
         }
         if( !$data['_wcmmq_g_product_step'] || $data['_wcmmq_g_product_step'] == '0' || $data['_wcmmq_g_product_step'] == 0 ){
            $data['_wcmmq_g_product_step'] = 1; 
@@ -73,7 +80,7 @@ function wcmmq_g_faq_page_details(){
             }
         }
         update_option( WC_MMQ_G::KEY, $final_data);
-        echo '<div class="updated inline"><p>Successfully Updated</p></div>';
+        echo sprintf( '<div class="updated inline"><p>%s</p></div>', __( 'Successfully Updated', 'wcmmq' ));
     }
     
     
@@ -87,7 +94,7 @@ function wcmmq_g_faq_page_details(){
                 <span class="configure_section_title">Settings (Universal)</span>
                 <table class="wcmmq_g_config_form">
                     <tr>
-                        <th>Minimum Quantity</th>
+                        <th><?php echo esc_html__( 'Minimum Quantity', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_min_quantity]" value="<?php echo esc_attr($saved_data['_wcmmq_g_min_quantity']); ?>"  type="number" step=any>
                         </td>
@@ -95,7 +102,7 @@ function wcmmq_g_faq_page_details(){
                     </tr>
 
                     <tr>
-                        <th>Maximum Quantity</th>
+                        <th><?php echo esc_html__( 'Maximum Quantity', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_max_quantity]" value="<?php echo esc_attr($saved_data['_wcmmq_g_max_quantity']); ?>"  type="number" step=any>
                         </td>
@@ -103,7 +110,7 @@ function wcmmq_g_faq_page_details(){
                     </tr>
 
                     <tr>
-                        <th>Quantity Step</th>
+                        <th><?php echo esc_html__( 'Quantity Step', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_product_step]" value="<?php echo esc_attr($saved_data['_wcmmq_g_product_step']); ?>"  type="number" step=any>
                         </td>
@@ -111,44 +118,44 @@ function wcmmq_g_faq_page_details(){
                     </tr>
 
                 </table>
-                <span class="configure_section_title">Messages</span>
+                <span class="configure_section_title"><?php echo esc_html__( 'Messages', 'wcmmq' ); ?></span>
                 <table class="wcmmq_g_config_form wcmmq_g_config_form_message">
                     <tr>
-                        <th>Minimum Quantity Validation Message</th>
+                        <th><?php echo esc_html__( 'Minimum Quantity Validation Message', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_msg_min_limit]" value="<?php echo esc_attr( $saved_data['_wcmmq_g_msg_min_limit'] ); ?>"  type="text">
                         </td>
 
                     </tr>
                     <tr>
-                        <th>Maximum Quantity Validation Message</th>
+                        <th><?php echo esc_html__( 'Maximum Quantity Validation Message', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_msg_max_limit]" value="<?php echo esc_attr( $saved_data['_wcmmq_g_msg_max_limit'] ); ?>"  type="text">
                         </td>
 
                     </tr>
                     <tr>
-                        <th>Already in cart message</th>
+                        <th><?php echo esc_html__( 'Already in cart message', 'wcmmq' ); ?></th>
                         <td>
                             <input name="data[_wcmmq_g_msg_max_limit_with_already]" value="<?php echo esc_attr( $saved_data['_wcmmq_g_msg_max_limit_with_already'] ); ?>"  type="text">
                         </td>
                     </tr>
                     <tr>
-                        <th>Minimum Quantity message for shop page</th>
+                        <th><?php echo esc_html__( 'Minimum Quantity message for shop page', 'wcmmq' ); ?></th>
                         <td>
-                            <input name="data[_wcmmq_g_min_qty_msg_in_loop]" value="<?php echo esc_attr( $saved_data['_wcmmq_g_min_qty_msg_in_loop'] ); ?>"  type="text">
+                            <input name="data[_wcmmq_g_min_qty_msg_in_loop]" value="<?php echo esc_attr( $saved_data['_wcmmq_g_min_qty_msg_in_loop'] ); ?>" type="text">
                         </td>
                     </tr>
                 </table>
-                <div class="wcmmq_g_waring_msg"><i>Important Note</i>: Don't change [<b>%s</b>], because it will work as like  variable. Here 1st [<b>%s</b>] will return Quantity(min/max) and second [<b>%s</b>] will return product's name.</div>
+                <div class="wcmmq_g_waring_msg"><?php echo esc_html__( "<i>Important Note</i>: Don't change [<b>%s</b>], because it will work as like  variable. Here 1st [<b>%s</b>] will return Quantity(min/max) and second [<b>%s</b>] will return product's name.", 'wcmmq' ); ?></div>
             </div>
             <br>
-            <button type="submit" name="configure_submit" class="button-primary primary button btn-info">Submit</button>
-            <button type="submit" name="reset_button" class="button">Reset</button>
+            <button type="submit" name="configure_submit" class="button-primary primary button btn-info"><?php echo esc_html__( 'Submit', 'wcmmq' ); ?></button>
+            <button type="submit" name="reset_button" class="button"><?php echo esc_html__( 'Reset', 'wcmmq' ); ?></button>
                     
         </form>
     </div>
-    <?php include_once 'includes/right_side.php'; ?>
+
 </div>  
 
 <?php

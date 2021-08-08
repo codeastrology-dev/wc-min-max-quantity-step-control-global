@@ -7,20 +7,12 @@
  * @param Array $product_data_tab
  * @return Array it will return Tabs Array
  */
-function wcmmq_g_product_edit_tab( $product_data_tab){
-    /*
-    $product_data_tab['wcmmq_g_min_max_step'] = array(
-            'label' => __('Min Max & Step','wcmmq'),
-            'target'   => 'wcmmq_g_min_max_step', //This is targetted div's id
-            'class'     => array('show_if_simple'),//array('hide_if_grouped','hide_if_downloadable'),
-            );
-    return $product_data_tab;
-    */
-
+function wcmmq_g_product_edit_tab( $product_data_tab ){
+    
     $my_tab['wcmmq_g_min_max_step'] = array(
-        'label' => __('Min Max & Step','wcmmq'),
-        'target'   => 'wcmmq_g_min_max_step', //This is targetted div's id
-        'class'     => array('hide_if_grouped','hide_if_downloadable'),
+        'label'     => __( 'Min Max & Step', 'wcmmq' ),
+        'target'    => 'wcmmq_g_min_max_step', //This is targetted div's id
+        'class'     => array( 'hide_if_grouped', 'hide_if_downloadable' ),
         );
 
     $position = 1; // Change this for desire position 
@@ -30,7 +22,7 @@ function wcmmq_g_product_edit_tab( $product_data_tab){
     return $tabs; //return $product_data_tab;
 
 }
-add_filter('woocommerce_product_data_tabs','wcmmq_g_product_edit_tab');
+add_filter( 'woocommerce_product_data_tabs', 'wcmmq_g_product_edit_tab' );
 
 /**
  * For Tab options of Min Max Step

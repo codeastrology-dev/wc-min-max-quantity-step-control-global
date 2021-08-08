@@ -21,6 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+* Including Plugin file for security
+* Include_once
+* 
+* @since 1.0.0
+*/
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+/**
  * Defining constant
  */
 define( 'WC_MMQ_G_PLUGIN_BASE_FOLDER', plugin_basename( dirname( __FILE__ ) ) );
@@ -76,19 +84,14 @@ class WC_MMQ_G {
      * @since 1.0
      */
     private static $_instance;
-    
-    /**
-
-       public static function getInstance() {
-               if ( ! ( self::$_instance instanceof self ) ) {
-                       self::$_instance = new self();
-               }
-
-               return self::$_instance;
-       }
-     */
 
     public function __construct() {
+
+        if ( !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+            add_action( 'admin_notices', [ $this, 'admin_notice_missing_main_plugin' ] );
+            return;
+        }
+
         $dir = dirname( __FILE__ );
         
         //Test File will load always when developing
@@ -125,7 +128,7 @@ class WC_MMQ_G {
         //Set default value in Options
         if($current_value){
            foreach( $default_value as $key=>$value ){
-              if( isset($current_value[$key]) && $key != 'plugin_version' ){ //We will add Plugin version in future
+              if( isset( $current_value[$key] ) && $key != 'plugin_version' ){ //We will add Plugin version in future
                  $changed_value[$key] = $current_value[$key];
               }else{
                   $changed_value[$key] = $value;
@@ -135,6 +138,20 @@ class WC_MMQ_G {
         }else{
            update_option(  self::KEY , $default_value );
         }
+    }
+
+    public function admin_notice_missing_main_plugin(){
+
+        if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
+
+           $message = sprintf(
+                   esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'wcmmq' ),
+                   '<strong>' . esc_html__( 'Min Max Quantity & Step Control Global', 'wcmmq' ) . '</strong>',
+                   '<strong><a href="' . esc_url( 'https://wordpress.org/plugins/woocommerce/' ) . '" target="_blank">' . esc_html__( 'WooCommerce', 'wcmmq' ) . '</a></strong>'
+           );
+
+           printf( '<div class="notice notice-error is-dismissible"><p>%1$s</p></div>', $message );
+
     }
     
     /**

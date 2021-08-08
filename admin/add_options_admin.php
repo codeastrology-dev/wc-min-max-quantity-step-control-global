@@ -8,43 +8,43 @@
  * @link https://docs.woocommerce.com/wc-apidocs/source-function-woocommerce_wp_text_input.html#14-79 Details of woocommerce_wp_text_input() from WooCommerce
  */
 function wcmmq_g_add_field_in_panel(){
-    $args = false;
+    $args = [];
     $args[] = array(
-        'id'        =>  '_wcmmq_g_min_quantity',
-        'name'        =>  '_wcmmq_g_min_quantity',
-        'label'     =>  __('Min Quantity','wcmmq'),
-        'class'     =>  'wcmmq_g_input',
-        'type'      =>  'number',
-        'desc_tip'  =>  true,
-        'description'=> __('Enter Minimum Quantity for this Product','wcmmq')
+        'id'            => '_wcmmq_g_min_quantity',
+        'name'          => '_wcmmq_g_min_quantity',
+        'label'         => __( 'Min Quantity', 'wcmmq' ),
+        'class'         => 'wcmmq_g_input',
+        'type'          => 'number',
+        'desc_tip'      => true,
+        'description'   => __( 'Enter Minimum Quantity for this Product', 'wcmmq' )
     );
     
     $args[] = array(
-        'id'        =>  '_wcmmq_g_max_quantity',
-        'name'        =>  '_wcmmq_g_max_quantity',
-        'label'     =>  __('Max Quantity','wcmmq'),
-        'class'     =>  'wcmmq_g_input',
-        'type'      =>  'number',
-        'desc_tip'  =>  true,
-        'description'=> __('Enter Maximum Quantity for this Product','wcmmq')
+        'id'            => '_wcmmq_g_max_quantity',
+        'name'          => '_wcmmq_g_max_quantity',
+        'label'         => __( 'Max Quantity', 'wcmmq' ),
+        'class'         => 'wcmmq_g_input',
+        'type'          => 'number',
+        'desc_tip'      => true,
+        'description'   => __( 'Enter Maximum Quantity for this Product', 'wcmmq' )
     );
     
     $args[] = array(
-        'id'        =>  '_wcmmq_g_product_step',
-        'name'        =>  '_wcmmq_g_product_step',
-        'label'     =>  __('Quantity Step','wcmmq'),
-        'class'     =>  'wcmmq_g_input',
-        'type'      =>  'number',
-        'desc_tip'  =>  true,
-        'description'=> __('Enter quantity Step','wcmmq')
+        'id'            => '_wcmmq_g_product_step',
+        'name'          => '_wcmmq_g_product_step',
+        'label'         => __( 'Quantity Step', 'wcmmq' ),
+        'class'         => 'wcmmq_g_input',
+        'type'          => 'number',
+        'desc_tip'      => true,
+        'description'   => __( 'Enter quantity Step', 'wcmmq' )
     );
     
-    foreach($args as $arg){
-        woocommerce_wp_text_input($arg);
+    foreach( $args as $arg ){
+        woocommerce_wp_text_input( $arg );
     }
 }
 
-add_action('woocommerce_product_options_wcmmq_g_minmaxstep','wcmmq_g_add_field_in_panel'); //Our custom action, which we have created to product_panel.php file
+add_action( 'woocommerce_product_options_wcmmq_g_minmaxstep', 'wcmmq_g_add_field_in_panel' ); //Our custom action, which we have created to product_panel.php file
 
 /**
  * To save and update our Data.
@@ -56,9 +56,9 @@ add_action('woocommerce_product_options_wcmmq_g_minmaxstep','wcmmq_g_add_field_i
  */
 function wcmmq_g_save_field_data( $post_id ){
     
-    $_wcmmq_g_min_quantity = isset( $_POST['_wcmmq_g_min_quantity'] ) && is_numeric($_POST['_wcmmq_g_min_quantity']) ? sanitize_text_field($_POST['_wcmmq_g_min_quantity']) : false;
-    $_wcmmq_g_max_quantity = isset( $_POST['_wcmmq_g_max_quantity'] ) && is_numeric($_POST['_wcmmq_g_max_quantity']) ? sanitize_text_field($_POST['_wcmmq_g_max_quantity']) : false;
-    $_wcmmq_g_product_step = isset( $_POST['_wcmmq_g_product_step'] ) && is_numeric($_POST['_wcmmq_g_product_step']) ? sanitize_text_field($_POST['_wcmmq_g_product_step']) : false;
+    $_wcmmq_g_min_quantity = isset( $_POST['_wcmmq_g_min_quantity'] ) && is_numeric( $_POST['_wcmmq_g_min_quantity'] ) ? sanitize_text_field( $_POST['_wcmmq_g_min_quantity'] ) : false;
+    $_wcmmq_g_max_quantity = isset( $_POST['_wcmmq_g_max_quantity'] ) && is_numeric( $_POST['_wcmmq_g_max_quantity'] ) ? sanitize_text_field( $_POST['_wcmmq_g_max_quantity'] ) : false;
+    $_wcmmq_g_product_step = isset( $_POST['_wcmmq_g_product_step'] ) && is_numeric( $_POST['_wcmmq_g_product_step'] ) ? sanitize_text_field( $_POST['_wcmmq_g_product_step'] ) : false;
     if($_wcmmq_g_min_quantity && $_wcmmq_g_max_quantity && $_wcmmq_g_min_quantity > $_wcmmq_g_max_quantity){
         $_wcmmq_g_max_quantity = $_wcmmq_g_min_quantity + 5;
     }
