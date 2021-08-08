@@ -49,7 +49,7 @@ function wcmmq_g_min_max_valitaion( $bool, $product_id, $quantity, $variation_id
         return true;
     }elseif( $min_quantity && $total_quantity < $min_quantity ){
         $message = sprintf( WC_MMQ_G::getOption( '_wcmmq_g_msg_min_limit' ), $min_quantity, $product_name ); // __( 'Minimum quantity should %s of "%s"', 'wcmmq' ) //Control from main file
-        wc_add_notice( $message, 'error' );
+        wc_add_notice( wp_kses_post( $message ), 'error' );
         return;
     }elseif( $max_quantity && $total_quantity > $max_quantity ){
         $message = false;
@@ -58,7 +58,7 @@ function wcmmq_g_min_max_valitaion( $bool, $product_id, $quantity, $variation_id
             $message .= " <br>";
         }
         $message .= sprintf( WC_MMQ_G::getOption( '_wcmmq_g_msg_max_limit' ), $max_quantity, $product_name ); // __( 'Minimum quantity should %s of "%s"', 'wcmmq' ) //Control from main file
-        wc_add_notice( esc_html( $message ), 'error' );
+        wc_add_notice( wp_kses_post( $message ), 'error' );
         return;
     }else{
         return true;
@@ -84,25 +84,24 @@ function wcmmq_g_update_cart_validation( $true, $cart_item_key, $values, $quanti
     
     $min_quantity = get_post_meta($product_id, '_wcmmq_g_min_quantity', true);
     $max_quantity = get_post_meta($product_id, '_wcmmq_g_max_quantity', true);
-    //var_dump($max_quantity);exit;
+    
     $min_quantity = !empty( $min_quantity ) ? $min_quantity : WC_MMQ_G::getOption( '_wcmmq_g_min_quantity' );
     $max_quantity = !empty( $max_quantity ) ? $max_quantity : WC_MMQ_G::getOption( '_wcmmq_g_max_quantity' );
     
     $product_name = get_the_title( $product_id );
-     //wc_add_notice( __( "QT " . $min_quantity, 'wcmmq' ), 'notice' );
     
     if((  !empty( $max_quantity ) && $max_quantity > 0 && $quantity <= $max_quantity) && $quantity >= $min_quantity ){
         return true;
     }elseif(!empty($max_quantity) && $max_quantity > 0 && $quantity > $max_quantity ){
         $message = sprintf( WC_MMQ_G::getOption( '_wcmmq_g_msg_max_limit' ), $max_quantity, $product_name ); // __( 'Minimum quantity should %s of "%s"', 'wcmmq' ) //Control from main file
-        wc_add_notice( esc_html( $message ), 'error' );
+        wc_add_notice( wp_kses_post( $message ), 'error' );
         return;
     }elseif( empty( $max_quantity ) && $quantity >= $min_quantity ){
     return true;
     
     }elseif( $quantity < $min_quantity ){
         $message = sprintf( WC_MMQ_G::getOption( '_wcmmq_g_msg_min_limit' ), $min_quantity, $product_name ); // __( 'Minimum quantity should %s of "%s"', 'wcmmq' ) //Control from main file
-        wc_add_notice( esc_html( $message ), 'error' );
+        wc_add_notice( wp_kses_post( $message ), 'error' );
         return;
     }else{
         return true;
@@ -124,7 +123,7 @@ add_filter('woocommerce_update_cart_validation', 'wcmmq_g_update_cart_validation
  * @link https://docs.woocommerce.com/wc-apidocs/source-function-woocommerce_quantity_input.html#1234 Details of filter 'woocommerce_quantity_input_args'
  */
 function wcmmq_g_quantity_input_args($args, $product){
-    //if(is_cart() ){
+    
     
     $product_id = get_the_ID();
     if(is_cart() ){
@@ -149,7 +148,7 @@ function wcmmq_g_quantity_input_args($args, $product){
     }
     $args['step'] = esc_attr( $step_quantity ); // Increment/decrement by this value (default = 1)
 
-    //}
+
     return $args;
 }
 add_filter( 'woocommerce_quantity_input_args', 'wcmmq_g_quantity_input_args', 10, 2 );
@@ -218,7 +217,7 @@ function wcmmq_g_set_min_qt_in_shop_loop( $button = false, $product = false, $ar
  * @since 1.0.14
  */
 function wcmmq_g_add_filter_for_shop_n_related_loop(){
-    add_filter('woocommerce_loop_add_to_cart_link','wcmmq_g_set_min_qt_in_shop_loop',10,3);
+    add_filter( 'woocommerce_loop_add_to_cart_link', 'wcmmq_g_set_min_qt_in_shop_loop',10,3);
 }
-add_action('woocommerce_before_shop_loop','wcmmq_g_add_filter_for_shop_n_related_loop' );
-add_action('woocommerce_after_single_product_summary','wcmmq_g_add_filter_for_shop_n_related_loop' );
+add_action( 'woocommerce_before_shop_loop', 'wcmmq_g_add_filter_for_shop_n_related_loop' );
+add_action( 'woocommerce_after_single_product_summary', 'wcmmq_g_add_filter_for_shop_n_related_loop' );

@@ -10,7 +10,7 @@
 function wcmmq_g_product_edit_tab( $product_data_tab ){
     
     $my_tab['wcmmq_g_min_max_step'] = array(
-        'label'     => __( 'Min Max & Step', 'wcmmq' ),
+        'label'     => esc_html__( 'Min Max & Step', 'wcmmq' ),
         'target'    => 'wcmmq_g_min_max_step', //This is targetted div's id
         'class'     => array( 'hide_if_grouped', 'hide_if_downloadable' ),
         );

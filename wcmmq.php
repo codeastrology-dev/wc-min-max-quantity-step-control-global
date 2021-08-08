@@ -94,16 +94,9 @@ class WC_MMQ_G {
 
         $dir = dirname( __FILE__ );
         
-        //Test File will load always when developing
-        //require_once $dir . '/admin/test.php'; //Only for Test Perpose.
-        
         if( is_admin() ){
-            
-            //require_once $dir . '/admin/product_panel.php';
-            //require_once $dir . '/admin/add_options_admin.php';
             require_once $dir . '/admin/set_menu_and_fac.php';
             require_once $dir . '/admin/plugin_setting_link.php';
-            //require_once $dir . '/admin/test.php';
         }
         require_once $dir . '/includes/set_max_min_quantity.php';
     }
@@ -226,18 +219,6 @@ class WC_MMQ_G {
        return $data['Name'];
     }
     
-    /**
-     * For checking anything
-     * Only for test, Nothing for anything else
-     * 
-     * @since 1.0
-     * @param void $something
-     */
-    public static function vd( $something ){
-        echo '<div style="width:400px; margin: 30px 0 0 181px;">';
-        var_dump( $something );
-        echo '</div>';
-    }
 }
 
 register_activation_hook( __FILE__, array( 'WC_MMQ_G','install' ) );

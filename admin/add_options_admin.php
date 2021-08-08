@@ -12,31 +12,31 @@ function wcmmq_g_add_field_in_panel(){
     $args[] = array(
         'id'            => '_wcmmq_g_min_quantity',
         'name'          => '_wcmmq_g_min_quantity',
-        'label'         => __( 'Min Quantity', 'wcmmq' ),
+        'label'         => esc_html__( 'Min Quantity', 'wcmmq' ),
         'class'         => 'wcmmq_g_input',
         'type'          => 'number',
         'desc_tip'      => true,
-        'description'   => __( 'Enter Minimum Quantity for this Product', 'wcmmq' )
+        'description'   => esc_html__( 'Enter Minimum Quantity for this Product', 'wcmmq' )
     );
     
     $args[] = array(
         'id'            => '_wcmmq_g_max_quantity',
         'name'          => '_wcmmq_g_max_quantity',
-        'label'         => __( 'Max Quantity', 'wcmmq' ),
+        'label'         => esc_html__( 'Max Quantity', 'wcmmq' ),
         'class'         => 'wcmmq_g_input',
         'type'          => 'number',
         'desc_tip'      => true,
-        'description'   => __( 'Enter Maximum Quantity for this Product', 'wcmmq' )
+        'description'   => esc_html__( 'Enter Maximum Quantity for this Product', 'wcmmq' )
     );
     
     $args[] = array(
         'id'            => '_wcmmq_g_product_step',
         'name'          => '_wcmmq_g_product_step',
-        'label'         => __( 'Quantity Step', 'wcmmq' ),
+        'label'         => esc_html__( 'Quantity Step', 'wcmmq' ),
         'class'         => 'wcmmq_g_input',
         'type'          => 'number',
         'desc_tip'      => true,
-        'description'   => __( 'Enter quantity Step', 'wcmmq' )
+        'description'   => esc_html__( 'Enter quantity Step', 'wcmmq' )
     );
     
     foreach( $args as $arg ){
@@ -67,8 +67,8 @@ function wcmmq_g_save_field_data( $post_id ){
     }
     
     //Updating Here
-    update_post_meta( $post_id, '_wcmmq_g_min_quantity', esc_attr( $_wcmmq_g_min_quantity ) ); 
-    update_post_meta( $post_id, '_wcmmq_g_max_quantity', esc_attr( $_wcmmq_g_max_quantity ) ); 
-    update_post_meta( $post_id, '_wcmmq_g_product_step', esc_attr( $_wcmmq_g_product_step ) ); 
+    update_post_meta( $post_id, '_wcmmq_g_min_quantity', sanitize_text_field( $_wcmmq_g_min_quantity ) ); 
+    update_post_meta( $post_id, '_wcmmq_g_max_quantity', sanitize_text_field( $_wcmmq_g_max_quantity ) ); 
+    update_post_meta( $post_id, '_wcmmq_g_product_step', sanitize_text_field( $_wcmmq_g_product_step ) ); 
 }
 add_action( 'woocommerce_process_product_meta', 'wcmmq_g_save_field_data' );

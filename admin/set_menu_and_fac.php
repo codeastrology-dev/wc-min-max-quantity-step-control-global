@@ -76,10 +76,10 @@ function wcmmq_g_faq_page_details(){
         if(is_array( $data ) && count( $data ) > 0 ){
             foreach($data as $key=>$value){
                 $val = str_replace('\\', '', $value );
-                $final_data[$key] = $val;
+                $final_data[$key] = sanitize_text_field( $val ); // all data sanitized
             }
         }
-        update_option( WC_MMQ_G::KEY, $final_data);
+        update_option( WC_MMQ_G::KEY, $final_data ); // all data sanitized
         echo sprintf( '<div class="updated inline"><p>%s</p></div>', __( 'Successfully Updated', 'wcmmq' ));
     }
     
